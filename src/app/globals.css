@@ -1,0 +1,188 @@
+@import "tailwindcss";
+
+/* ───────────────────────── DRISYON design tokens ───────────────────────── */
+@theme {
+  --color-ink: #060a1a;         /* deepest navy / near-black */
+  --color-navy: #0a1030;        /* section dark */
+  --color-navy-2: #10184a;      /* raised dark surface */
+  --color-paper: #fafafc;       /* light background */
+  --color-surface: #f1f2f8;     /* light raised / tinted section */
+  --color-text: #0b1024;
+  --color-muted: #5b6282;
+  --color-muted-dark: #9aa3c7;  /* muted on dark */
+  --color-line: rgb(11 16 36 / 0.1);
+  --color-line-dark: rgb(255 255 255 / 0.1);
+  --color-blue: #0b63ff;
+  --color-indigo: #4a3af0;
+  --color-violet: #a12be2;
+  --color-sky: #7fb2ff;         /* light accent on dark */
+
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Type scale — one place to tune heading sizes site-wide */
+  --text-hero: clamp(2.35rem, 4.4vw + 0.6rem, 4.25rem);
+  --text-hero--line-height: 0.98;
+  --text-h1: clamp(2.2rem, 3.6vw + 0.8rem, 4rem);
+  --text-h1--line-height: 1;
+  --text-h2: clamp(1.9rem, 2.6vw + 0.9rem, 3.25rem);
+  --text-h2--line-height: 1.02;
+  --text-h3: clamp(1.6rem, 1.6vw + 1rem, 2.4rem);
+  --text-h3--line-height: 1.05;
+  --text-lead: clamp(1.1rem, 0.7vw + 0.9rem, 1.4rem);
+  --text-lead--line-height: 1.5;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-sweep: sweep 6s var(--ease-out-soft) 1.2s infinite;
+  --animate-flow: flow 2.4s linear infinite;
+}
+
+@keyframes sweep {
+  0% { background-position: 160% 0; }
+  45%, 100% { background-position: -60% 0; }
+}
+@keyframes flow {
+  to { stroke-dashoffset: -24; }
+}
+
+:root {
+  --gradient-brand: linear-gradient(115deg, #0b63ff 0%, #4a3af0 52%, #a12be2 100%);
+  --gradient-text: linear-gradient(100deg, #0b63ff 0%, #4a3af0 45%, #a12be2 100%);
+  --gradient-text-dark: linear-gradient(100deg, #7fb2ff 0%, #9d8cff 50%, #d48bff 100%);
+  --nav-h: 76px;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 8px);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--color-paper);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection { background: rgb(74 58 240 / 0.18); }
+
+:focus-visible {
+  outline: 2px solid var(--color-indigo);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+.on-dark :focus-visible { outline-color: var(--color-sky); }
+
+/* ───────────────────────── Utilities ───────────────────────── */
+@utility container-x {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+  @media (width >= 768px) { padding-inline: 2rem; }
+  @media (width >= 1280px) { padding-inline: 2.5rem; }
+}
+
+@utility section-y {
+  padding-block: 5rem;
+  @media (width >= 768px) { padding-block: 6.5rem; }
+  @media (width >= 1280px) { padding-block: 8rem; }
+}
+
+@utility text-gradient {
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility text-gradient-dark {
+  background: var(--gradient-text-dark);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* Hairline grid used as a quiet technical texture */
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, rgb(11 16 36 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(11 16 36 / 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+@utility grid-lines-dark {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Animated light sweep clipped to the logo artwork itself */
+.logo-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgb(255 255 255 / 0.85) 50%, transparent 62%);
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  mix-blend-mode: soft-light;
+  animation: var(--animate-sweep);
+}
+
+/* Hero entrance — pure CSS so it plays before hydration (good for LCP) */
+@keyframes rise-line { from { transform: translateY(110%); } to { transform: translateY(0); } }
+@keyframes fade-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.rise-line { animation: rise-line 1.1s var(--ease-out-soft) both; }
+.fade-up { animation: fade-up 0.9s var(--ease-out-soft) both; }
+.fade-in { animation: fade-in 1.4s ease both; }
+@keyframes logo-mark-in {
+  from { opacity: 0; transform: scale(0.82) rotate(-8deg); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes logo-word-in {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+.logo-mark-in { animation: logo-mark-in 1.1s var(--ease-out-soft) both; }
+.logo-word-in { animation: logo-word-in 1s var(--ease-out-soft) 0.35s both; }
+@keyframes scroll-cue { from { transform: translateY(-100%); } to { transform: translateY(200%); } }
+.scroll-cue { animation: scroll-cue 2.2s ease-in-out infinite; }
+
+.flow-dash {
+  stroke-dasharray: 4 8;
+  animation: var(--animate-flow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .logo-sweep { display: none; }
+}
