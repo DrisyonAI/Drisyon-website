@@ -20,13 +20,14 @@ npm run build && npm start   # production
 
 ## Contact form email
 
-`POST /api/contact` validates the input, applies spam protection (a honeypot field, a minimum fill time and a per-IP rate limit) and sends the message through the [Resend](https://resend.com) HTTP API. The visitor's address is set as **reply-to**.
+`POST /api/contact` validates the input, applies spam protection (a honeypot field, a minimum fill time and a per-IP rate limit) and sends the message through the **Hostinger mailbox** over SMTP. The visitor's address is set as **reply-to**.
 
 | Variable | Purpose |
 | --- | --- |
-| `RESEND_API_KEY` | Resend API key (server-only; never prefix it with `NEXT_PUBLIC_`) |
-| `CONTACT_FROM_EMAIL` | Sender on a domain verified in Resend, e.g. `DRISYON Website <noreply@drisyon.com>` |
-| `CONTACT_TO_EMAIL` | Destination address (defaults to `reachus@drisyon.com`) |
+| `SMTP_USER` | Mailbox that sends the emails: `reachus@drisyon.com` |
+| `SMTP_PASS` | That mailbox's password (server-only; never prefix it with `NEXT_PUBLIC_`) |
+| `SMTP_HOST` / `SMTP_PORT` | Default to `smtp.hostinger.com` / `465` |
+| `CONTACT_TO_EMAIL` | Destination address (defaults to `SMTP_USER`) |
 
 Without these variables, development mode logs each message to the server console. Production returns a "temporarily unavailable" error so that no message is silently lost.
 
@@ -48,23 +49,39 @@ The booking flow works in two modes. It switches automatically based on environm
 
 If Google is unreachable, the booking falls back to an emailed request, so no booking is lost.
 
-## Going live (once subscriptions are purchased)
+## Going live on drisyon.com
 
-Add these in your hosting provider's environment-variable settings (e.g. Vercel → Project → Settings → Environment Variables), then redeploy. All are server-side secrets, so don't commit them.
+**Setup:** code on GitHub at `DrisyonAI/Drisyon-website`, hosting on Vercel, and domain, DNS and email on Hostinger.
 
-**1. Email: required for the contact form and booking notifications**
-1. Create a [Resend](https://resend.com) account and verify the `drisyon.com` domain. This means adding the DNS records Resend shows you.
-2. Set `RESEND_API_KEY`, `CONTACT_FROM_EMAIL` (e.g. `DRISYON Website <noreply@drisyon.com>`) and `CONTACT_TO_EMAIL=reachus@drisyon.com`.
+**1. Deploy on Vercel**
+1. Sign in at [vercel.com](https://vercel.com) with GitHub. Use the **Pro** plan for a company site, because the free Hobby plan is for non-commercial use.
+2. **Add New → Project**, import `DrisyonAI/Drisyon-website`, and keep the detected Next.js settings.
+3. Under **Environment Variables**, add the values from `.env.example`. At minimum:
+   - `SMTP_USER=reachus@drisyon.com`
+   - `SMTP_PASS` (the mailbox password)
+   - `CONTACT_TO_EMAIL=reachus@drisyon.com`
+   - `NEXT_PUBLIC_SITE_URL=https://drisyon.com`
+4. Click **Deploy**. From then on, every push to `main` redeploys automatically.
 
-**2. Google Calendar: automatic scheduling**
+**2. Connect the domain**
+1. In Vercel, go to **Project → Settings → Domains** and add `drisyon.com` and `www.drisyon.com`. Redirect `www` to `drisyon.com`.
+2. In **Hostinger → Domains → drisyon.com → DNS / Nameservers**, edit only these records. Use the values Vercel displays if they differ:
+
+   | Type | Name | Value |
+   | --- | --- | --- |
+   | A | `@` | `76.76.21.21` (replaces the current `2.57.91.91`) |
+   | CNAME | `www` | `cname.vercel-dns.com` |
+
+   Delete any other `A`/`AAAA`/`ALIAS` record on `@` or `www`. **Leave the MX, TXT (SPF/DKIM/DMARC) and other mail records untouched**, or reachus@drisyon.com stops receiving email. Keep the Hostinger nameservers.
+3. DNS changes take from a few minutes to a few hours to spread. Vercel then issues the HTTPS certificate automatically.
+
+**3. Google Calendar: automatic scheduling (optional, can be done later)**
 1. In [Google Cloud Console](https://console.cloud.google.com), create a project and enable the **Google Calendar API**.
 2. Under *APIs & Services → OAuth consent screen*, choose **Internal** if drisyon.com is on Google Workspace. Otherwise choose External and **publish** the app; apps left in "Testing" have refresh tokens that expire after 7 days.
 3. Under *Credentials*, create an **OAuth client ID** (type *Web application*) with the authorised redirect URI `http://localhost:53682/callback`.
 4. Put `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` in `.env.local`, then run `node scripts/google-auth.mjs`. Sign in as the account that should own the bookings (e.g. reachus@drisyon.com), and copy the printed `GOOGLE_REFRESH_TOKEN`.
 5. Set `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` and `GOOGLE_REFRESH_TOKEN` in production.
 6. Optional: to book into each founder's own calendar, share that calendar with the connected account ("Make changes to events") and set `GOOGLE_CALENDAR_ID_NARAYANAMURTHY` / `GOOGLE_CALENDAR_ID_MADHURA_REDDY`. To invite the founder to each of their calls, set `FOUNDER_EMAIL_NARAYANAMURTHY` / `FOUNDER_EMAIL_MADHURA_REDDY`. Without these, every booking goes into the connected account's primary calendar.
-
-**3. Site URL:** set `NEXT_PUBLIC_SITE_URL` to the final domain.
 
 Alternative: set `NEXT_PUBLIC_BOOKING_URL_<FOUNDER>` to a Calendly or Cal.com link. That founder's card then opens the external scheduler instead of the built-in picker.
 

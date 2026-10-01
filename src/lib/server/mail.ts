@@ -1,8 +1,9 @@
 import "server-only";
+import nodemailer from "nodemailer";
 
 /**
  * Server-only helpers shared by the form endpoints. Secrets come from environment variables
- * (RESEND_API_KEY, CONTACT_FROM_EMAIL, CONTACT_TO_EMAIL) and never reach the browser.
+ * (SMTP_USER, SMTP_PASS, CONTACT_TO_EMAIL) and never reach the browser.
  */
 
 const WINDOW_MS = 10 * 60 * 1000;
@@ -40,35 +41,48 @@ export function emailHtml(heading: string, rows: [string, string][], message?: s
 
 export type SendResult = { ok: true; dev?: boolean } | { ok: false; status: number; error: string };
 
-/** Sends via the Resend HTTP API. In development without keys, logs the message instead. */
+/**
+ * Sends through the Hostinger mailbox over SMTP (SMTP_USER / SMTP_PASS).
+ * The message is sent from that mailbox to CONTACT_TO_EMAIL, with the visitor as reply-to.
+ * In development without credentials, logs the message instead.
+ */
 export async function sendMail({ subject, text, html, replyTo }: { subject: string; text: string; html: string; replyTo: string }): Promise<SendResult> {
-  const to = process.env.CONTACT_TO_EMAIL || "reachus@drisyon.com";
-  const from = process.env.CONTACT_FROM_EMAIL;
-  const apiKey = process.env.RESEND_API_KEY;
+  const user = process.env.SMTP_USER?.trim();
+  const pass = process.env.SMTP_PASS;
+  const to = process.env.CONTACT_TO_EMAIL?.trim() || user || "reachus@drisyon.com";
 
-  if (!apiKey || !from) {
+  if (!user || !pass) {
     if (process.env.NODE_ENV !== "production") {
       console.info(`[mail] Delivery not configured — logged instead:\nSubject: ${subject}\n${text}`);
       return { ok: true, dev: true };
     }
-    console.error("[mail] RESEND_API_KEY / CONTACT_FROM_EMAIL are not set.");
+    console.error("[mail] SMTP_USER / SMTP_PASS are not set.");
     return { ok: false, status: 503, error: "This form is temporarily unavailable." };
   }
 
+  const port = Number(process.env.SMTP_PORT || 465);
+  const transport = nodemailer.createTransport({
+    host: process.env.SMTP_HOST?.trim() || "smtp.hostinger.com",
+    port,
+    secure: port === 465,
+    auth: { user, pass },
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 15_000,
+  });
+
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
-      body: JSON.stringify({ from, to: [to], reply_to: replyTo, subject: oneLine(subject).slice(0, 180), text, html }),
-      signal: AbortSignal.timeout(10000),
+    await transport.sendMail({
+      from: { name: process.env.SMTP_FROM_NAME?.trim() || "DRISYON Website", address: user },
+      to,
+      replyTo,
+      subject: oneLine(subject).slice(0, 180),
+      text,
+      html,
     });
-    if (!res.ok) {
-      console.error("[mail] Resend error", res.status, await res.text().catch(() => ""));
-      return { ok: false, status: 502, error: "We couldn't send your message right now." };
-    }
     return { ok: true };
   } catch (err) {
-    console.error("[mail] Delivery failed", err);
+    console.error("[mail] SMTP delivery failed", err);
     return { ok: false, status: 502, error: "We couldn't send your message right now." };
   }
 }
