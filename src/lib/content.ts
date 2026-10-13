@@ -311,7 +311,7 @@ export type TeamMember = { name: string; role: string; initials: string; photo?:
 export const team: TeamMember[] = [
   { name: "P. Komal Naga Venkata Vinay", role: "Post-Production Specialist", initials: "VV", photo: "/team/vinay.jpg" },
   { name: "Kondeti Sai", role: "Video Production Specialist", initials: "KS", photo: "/team/sai.jpg" },
-  { name: "Keerthana Devarakonda", role: "Outreach & Engagement Leader", initials: "KD", photo: "/team/keerthana.jpg" },
+  { name: "Keerthana Devarakonda", role: "Outreach & Engagement Leader", initials: "KD", photo: "/team/keerthana-devarakonda.jpg" },
 ];
 
 export const interestOptions = [
