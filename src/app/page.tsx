@@ -7,6 +7,7 @@ import { Hero } from "@/components/Hero";
 import { Industries } from "@/components/Industries";
 import { Process } from "@/components/Process";
 import { Solutions } from "@/components/Solutions";
+import { Team } from "@/components/Team";
 import { WhyDrisyon } from "@/components/WhyDrisyon";
 
 /*
@@ -26,6 +27,7 @@ export default function Home() {
       <WhyDrisyon />
       <Community />
       <About />
+      <Team />
       <Contact />
     </>
   );

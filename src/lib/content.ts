@@ -305,6 +305,15 @@ export const founders: Founder[] = [
   },
 ];
 
+export type TeamMember = { name: string; role: string; initials: string; photo?: string };
+
+/** Shown in the Team section after the co-founders. Add people here; photos go in /public/team/. */
+export const team: TeamMember[] = [
+  { name: "P. Komal Naga Venkata Vinay", role: "Post-Production Specialist", initials: "VV", photo: "/team/vinay.jpg" },
+  { name: "Kondeti Sai", role: "Video Production Specialist", initials: "KS", photo: "/team/sai.jpg" },
+  { name: "Keerthana Devarakonda", role: "Outreach & Engagement Leader", initials: "KD", photo: "/team/keerthana.jpg" },
+];
+
 export const interestOptions = [
   "Automation Services",
   "SI Agents",
