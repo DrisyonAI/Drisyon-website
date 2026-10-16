@@ -1,4 +1,5 @@
 import { HERO_COLS as COLS, HERO_STAGES } from "@/lib/content";
+import { CohortAnnouncement } from "./cohort/Announcement";
 import { HeroField } from "./HeroField";
 import { Button } from "./ui";
 
@@ -43,6 +44,7 @@ export function Hero() {
 
       <div className="container-x relative grid min-h-[calc(100svh-84px)] grid-cols-1 content-center gap-10 pb-12 pt-10 lg:grid-cols-12 lg:pb-20">
         <div className="relative z-10 lg:col-span-6">
+          <CohortAnnouncement className="fade-up mb-8" style={d(0.1)} />
           <p className="fade-up eyebrow mb-7 flex items-center gap-3 text-indigo" style={d(0.2)}>
             <span aria-hidden="true" className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo opacity-40" />

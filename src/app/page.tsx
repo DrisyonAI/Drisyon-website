@@ -15,6 +15,9 @@ import { WhyDrisyon } from "@/components/WhyDrisyon";
  * → light learning/corporate → gradient statement → light community/about → dark contact.
  * Featured work lives on its own page: /work.
  */
+// Re-check every 30 minutes so the cohort announcement (offer line, start-date cutoff) stays current.
+export const revalidate = 1800;
+
 export default function Home() {
   return (
     <>
