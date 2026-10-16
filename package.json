@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "node --conditions=react-server --import tsx --test \"tests/*.test.ts\""
   },
   "dependencies": {
     "motion": "^13.4.6",
@@ -25,6 +26,7 @@
     "postcss": "^8.5.28",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
     "typescript": "^7.0.2"
   }
 }

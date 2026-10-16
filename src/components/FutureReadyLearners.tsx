@@ -1,5 +1,6 @@
+import Link from "next/link";
 import { courses } from "@/lib/content";
-import { Button, Eyebrow, Reveal } from "./ui";
+import { Arrow, Button, Eyebrow, Reveal } from "./ui";
 
 const audiences = ["Undergraduate students", "Graduates", "Aspiring builders"];
 
@@ -33,8 +34,34 @@ export function FutureReadyLearners() {
           </Reveal>
         </div>
 
+        {/* Featured cohort: now enrolling */}
+        <Reveal className="mt-12 md:mt-14">
+          <Link
+            href="/cloud-security"
+            className="on-dark group relative flex flex-col gap-6 overflow-hidden rounded-[26px] bg-ink p-6 text-white sm:p-8 md:flex-row md:items-center md:justify-between"
+          >
+            <span aria-hidden="true" className="absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-40 blur-3xl" style={{ background: "var(--gradient-brand)" }} />
+            <span className="relative">
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-sky" aria-hidden="true" />
+                Now enrolling · Starts 1 Nov 2026
+              </span>
+              <span className="mt-4 block font-display text-[1.6rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[1.9rem]">
+                Cloud Security Cohort 01
+              </span>
+              <span className="mt-2 block max-w-xl text-sm leading-relaxed text-white/65">
+                6 months · 90 hours · 10 hands-on labs · 6 OEM certification tracks · 30 hours in a live industry lab. For DevOps, SRE and cloud engineers. 30 seats.
+              </span>
+            </span>
+            <span className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-white px-5 py-3 text-sm font-medium text-ink transition-transform duration-300 group-hover:translate-x-0.5 md:self-center">
+              View program
+              <Arrow />
+            </span>
+          </Link>
+        </Reveal>
+
         {/* Courses */}
-        <ul className="mt-12 grid gap-4 md:mt-14 md:grid-cols-3">
+        <ul className="mt-4 grid gap-4 md:grid-cols-3">
           {courses.map((c, i) => (
             <li key={c.code}>
               <Reveal delay={i * 0.08} className="h-full">

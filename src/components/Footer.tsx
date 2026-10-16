@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { footerNav, site, socials } from "@/lib/site";
+import { footerNav, legalNav, site, socials } from "@/lib/site";
 import { Button } from "./ui";
 
 export function Footer() {
@@ -88,7 +88,16 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <p className="mt-12 text-xs text-white/40">© 2026 DRISYON. All rights reserved.</p>
+        <div className="mt-12 flex flex-col gap-3 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+          <p>© 2026 DRISYON. All rights reserved.</p>
+          <nav aria-label="Policies" className="flex flex-wrap gap-x-5 gap-y-2">
+            {legalNav.map((n) => (
+              <Link key={n.href} href={n.href} className="transition-colors hover:text-white">
+                {n.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
       </div>
     </footer>
   );

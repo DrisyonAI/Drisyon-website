@@ -10,8 +10,10 @@ type Status = "idle" | "sending" | "success" | "error";
 
 const empty: Fields = { name: "", email: "", company: "", phone: "", interest: "", message: "" };
 
-export function ContactForm() {
-  const [f, setF] = useState<Fields>(empty);
+/** `defaultInterest` preselects the "Interested in" option (e.g. on a program page). */
+export function ContactForm({ defaultInterest = "" }: { defaultInterest?: string } = {}) {
+  const blank: Fields = { ...empty, interest: defaultInterest };
+  const [f, setF] = useState<Fields>(blank);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>("idle");
   const [serverMsg, setServerMsg] = useState("");
@@ -61,7 +63,7 @@ export function ContactForm() {
         throw new Error(data?.error || "Something went wrong.");
       }
       setStatus("success");
-      setF(empty);
+      setF(blank);
     } catch (err) {
       setStatus("error");
       setServerMsg(err instanceof Error ? err.message : "Something went wrong.");

@@ -27,6 +27,7 @@ export const footerNav: NavItem[] = [
   { label: "Community", href: "/#community" },
   { label: "Future-Ready Learners", href: "/#learners" },
   { label: "Corporate", href: "/#corporate" },
+  { label: "Cloud Security Cohort", href: "/cloud-security" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -42,3 +43,10 @@ export const socials: { label: string; href: string | null }[] = [
 ];
 
 export const communityUrl: string | null = process.env.NEXT_PUBLIC_COMMUNITY_URL || null;
+
+export const legalNav: NavItem[] = [
+  { label: "Terms", href: "/terms" },
+  { label: "Refunds", href: "/refund-policy" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Contact", href: "/contact" },
+];

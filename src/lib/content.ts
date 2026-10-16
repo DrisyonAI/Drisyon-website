@@ -319,6 +319,7 @@ export const interestOptions = [
   "SI Agents",
   "Custom Automation",
   "Partnership",
+  "Cloud Security Cohort",
   "Student Training",
   "Corporate Training",
   "Other",

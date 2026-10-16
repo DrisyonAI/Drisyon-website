@@ -85,6 +85,37 @@ If Google is unreachable, the booking falls back to an emailed request, so no bo
 
 Alternative: set `NEXT_PUBLIC_BOOKING_URL_<FOUNDER>` to a Calendly or Cal.com link. That founder's card then opens the external scheduler instead of the built-in picker.
 
+## Cloud Security Cohort 01 (`/cloud-security`)
+
+This course page was merged from Talia Technologies' `drisyon-cyber-cohort` project and rebuilt in this site's design. It includes the policy pages Razorpay requires: `/terms`, `/refund-policy`, `/privacy` and `/contact`.
+
+| What | Where |
+| --- | --- |
+| Price, offer, deadline, seat cap | `src/lib/cohort/pricing.ts` (the single source of truth; the server recomputes every order) |
+| Page text: roadmap, labs, certifications, FAQ | `src/lib/cohort/content.ts` |
+| Company legal details for the policy pages | `src/lib/company.ts` |
+| Payment endpoints | `/api/razorpay/order`, `/api/razorpay/verify`, `/api/razorpay/webhook` (logic in `src/lib/server/cohort-payments.ts`) |
+| Enrolment table | `supabase/migrations/20261016000000_drisyon_enrolments.sql` (table `drisyon_enrolments`) |
+| Tests | `npm test` (42 tests ported from the original project) |
+
+**Current mode: enquiries only.** The page shows an enquiry form, which arrives at reachus@drisyon.com tagged "Cloud Security Cohort". Online payment switches on only when all three of these are true:
+
+1. `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` are set in Vercel.
+2. `COHORT_PAYMENTS=on` is set.
+3. `registeredOffice` and `grievanceOfficer` are filled in `src/lib/company.ts`. Until they are, the policy pages show highlighted placeholders and are kept out of search engines.
+
+**Go-live checklist** (from the original project's launch plan):
+- [ ] Fill the registered office address and grievance officer in `src/lib/company.ts`.
+- [ ] Sign off the refund windows (100% until 25 Oct, 50% until 14 Nov) and the exam-voucher wording in the terms.
+- [ ] Get written confirmation from the industry-lab partner for "patented, licensed enterprise tools" and the named vendors.
+- [ ] Set `CONTACT_PHONE` to show the Call / WhatsApp buttons.
+- [ ] Set the Razorpay **test** keys, `RAZORPAY_WEBHOOK_SECRET`, `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`, then `COHORT_PAYMENTS=on`.
+- [ ] In Razorpay, add the webhook `https://drisyon.com/api/razorpay/webhook` with the events `order.paid`, `payment.captured`, `payment.failed` and `refund.processed`.
+- [ ] Make one test payment and one test refund. Check that the row appears in `drisyon_enrolments` and then shows `refunded`.
+- [ ] Switch to the **live** keys after Razorpay KYC and submit drisyon.com for live activation.
+
+The Navratri offer price ends automatically on 20 Oct 2026 at 11:59 pm IST. The page re-renders every 5 minutes, and an open tab switches over at the deadline.
+
 ## Content still to supply
 
 Nothing below was invented. Each item shows a clearly marked placeholder until the real content is added:
