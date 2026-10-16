@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { booking, formatSlot, isValidSlot } from "@/lib/booking";
-import { founders } from "@/lib/content";
+import { bookableFounders } from "@/lib/content";
 import { clientIp, emailHtml, rateLimited, sendMail } from "@/lib/server/mail";
 import { busyIntervals, calendarIdFor, createEvent, founderEmailFor, isCalendarConfigured, overlaps } from "@/lib/server/google-calendar";
 
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
   const elapsed = typeof body.elapsed === "number" ? body.elapsed : 0;
   if (str("website") || elapsed < MIN_FILL_MS) return NextResponse.json({ ok: true, scheduled: false });
 
-  const founder = founders.find((f) => f.id === str("founder"));
+  const founder = bookableFounders.find((f) => f.id === str("founder"));
   const slot = str("slot");
   const name = str("name"), email = str("email"), company = str("company"), topic = str("topic");
 

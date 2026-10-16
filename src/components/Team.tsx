@@ -23,7 +23,7 @@ export function Team() {
           </Reveal>
         </div>
 
-        <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:mt-16 lg:grid-cols-5 lg:gap-5">
+        <ul className="mt-12 grid grid-cols-2 gap-4 sm:grid-cols-3 md:mt-16 lg:grid-cols-6 lg:gap-4">
           {people.map((p, i) => (
             <li key={p.name}>
               <Reveal delay={i * 0.06} className="h-full">

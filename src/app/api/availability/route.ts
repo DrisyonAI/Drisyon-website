@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { booking, upcomingDays } from "@/lib/booking";
-import { founders } from "@/lib/content";
+import { bookableFounders } from "@/lib/content";
 import { busyIntervals, calendarIdFor, isCalendarConfigured, overlaps } from "@/lib/server/google-calendar";
 
 /**
@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: Request) {
   const id = new URL(req.url).searchParams.get("founder") || "";
-  if (!founders.some((f) => f.id === id)) return NextResponse.json({ error: "Unknown founder." }, { status: 404 });
+  if (!bookableFounders.some((f) => f.id === id)) return NextResponse.json({ error: "Unknown founder." }, { status: 404 });
   if (!isCalendarConfigured()) return NextResponse.json({ live: false, unavailable: [] });
 
   const slots = upcomingDays().flatMap((d) => d.slots);

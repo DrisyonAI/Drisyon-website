@@ -284,10 +284,20 @@ export type Founder = {
   photo?: string;
   /** Optional external scheduler (Calendly, Cal.com…). When set, it replaces the built-in slot picker. */
   bookingUrl?: string;
+  /** false = shown in the Team section but not offered under "Talk to a founder". Defaults to true. */
+  bookable?: boolean;
 };
 
 /** Add a `photo` path (e.g. "/team/narayanamurthy.jpg") once official photographs are available. */
 export const founders: Founder[] = [
+  {
+    id: "nandela-tejeswi",
+    name: "Nandela Tejeswi",
+    role: "Co-Founder",
+    initials: "NT",
+    photo: "/team/nandela-tejeswi.jpg",
+    bookable: false,
+  },
   {
     id: "narayanamurthy",
     name: "T. Narayanamurthy",
@@ -324,3 +334,6 @@ export const interestOptions = [
   "Corporate Training",
   "Other",
 ] as const;
+
+/** Founders offered under "Talk to a founder" (call booking). */
+export const bookableFounders = founders.filter((f) => f.bookable !== false);
