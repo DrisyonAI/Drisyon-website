@@ -3,7 +3,7 @@ import { Checkout } from "@/components/cohort/Checkout";
 import { OfferCard } from "@/components/cohort/OfferCard";
 import { ContactForm } from "@/components/ContactForm";
 import { Eyebrow, Reveal } from "@/components/ui";
-import { capstone, certs, facts, faq, hours, labBlocks, months, telemetry, tools, trainerFacts, who } from "@/lib/cohort/content";
+import { capstone, certs, facts, faq, hours, labBlocks, months, tools, trainerFacts, who } from "@/lib/cohort/content";
 import { GST_RATE_BPS, LIST_PRICE_PAISE, OFFER_ENDS_AT, OFFER_NAME, OFFER_PRICE_PAISE, PROGRAM, rupees } from "@/lib/cohort/pricing";
 import { company, contactPhone } from "@/lib/company";
 import { paymentsReady } from "@/lib/server/cohort-payments";
@@ -97,16 +97,6 @@ export default function CloudSecurityPage() {
           </div>
         </div>
 
-        {/* Sample SIEM output */}
-        <div aria-label="Sample SIEM output from the course lab" className="on-dark overflow-x-auto bg-ink py-5 text-white">
-          <div className="container-x space-y-1 font-mono text-[0.75rem] leading-relaxed text-white/70 sm:text-[0.8rem]">
-            {telemetry.map((l) => (
-              <p key={l.t} className="whitespace-pre">
-                <span className="text-white/40">{l.t}</span>  {l.line}  <span className={l.kind === "hit" ? "text-[#ff8fa3]" : "text-[#7fe0b0]"}>{l.tag}</span>
-              </p>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* ── Who ─────────────────────────────────────────── */}

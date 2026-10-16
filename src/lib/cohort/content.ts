@@ -10,14 +10,6 @@ export const facts = [
   { label: "Cohort", value: "30 seats only" },
 ];
 
-/** Sample SIEM output shown under the hero. */
-export const telemetry = [
-  { t: "09:42:17 IST", line: "wazuh   rule 5712  sshd brute-force   src=203.0.113.24", tag: "level 10", kind: "hit" },
-  { t: "09:42:18 IST", line: "fortigate policy 14  deny  203.0.113.24 → 10.20.1.15:22", tag: "blocked", kind: "ok" },
-  { t: "09:44:02 IST", line: "sigma   aws_iam_access_key_created_by_root   account=lab-prod", tag: "high", kind: "hit" },
-  { t: "09:44:05 IST", line: "soar    playbook revoke-key.yml  step 3/3", tag: "contained", kind: "ok" },
-] as const;
-
 export const who = [
   { title: "You are", items: ["DevOps, SRE, platform or cloud engineer", "2–10 years in IT operations or delivery", "Moving toward DevSecOps, cloud security or SOC roles"] },
   { title: "You bring", items: ["Comfort with Linux and the command line", "TCP/IP and networking basics", "Working use of AWS, Azure or GCP"] },
