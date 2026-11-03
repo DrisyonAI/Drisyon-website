@@ -11,13 +11,13 @@ test("applies the Navratri price before the deadline", () => {
   assert.equal(q.offerApplied, true);
   assert.equal(q.unitPaise, 75_000_00);
   assert.equal(q.totalPaise, 75_000_00);
-  assert.equal(q.savingPaise, 25_000_00);
+  assert.equal(q.savingPaise, 0); // list price is now ₹75,000, so the old offer saves nothing
 });
 
-test("charges the list price after the deadline", () => {
+test("charges the list price (₹75,000) after the deadline", () => {
   const q = quote({ seats: 1, now: AFTER_DEADLINE });
   assert.equal(q.offerApplied, false);
-  assert.equal(q.totalPaise, 1_00_000_00);
+  assert.equal(q.totalPaise, 75_000_00);
   assert.equal(q.savingPaise, 0);
 });
 

@@ -17,7 +17,7 @@ export function Footer() {
             </p>
           </div>
           <div className="flex flex-col items-start gap-5 lg:col-span-4 lg:items-end lg:text-right">
-            {/* Brand lockup: logo, tagline, "powered by" and the Brain O Vision badge share one centre axis */}
+            {/* Brand lockup: logo and tagline share one centre axis */}
             <div className="flex w-[220px] flex-col items-center text-center">
               <div className="flex items-end gap-3">
                 <Image src="/logo-mark.png" alt="" width={38} height={52} className="h-[52px] w-auto" />
@@ -27,18 +27,6 @@ export function Footer() {
                 Innovate<span className="text-sky">.</span> Integrate<span className="text-sky">.</span> Automate
                 <span className="text-sky">.</span>
               </p>
-              <p className="mt-5 flex w-full items-center gap-3 text-xs text-white/50">
-                <span aria-hidden="true" className="h-px flex-1 bg-white/20" />
-                powered by
-                <span aria-hidden="true" className="h-px flex-1 bg-white/20" />
-              </p>
-              <Image
-                src="/brainovision.png"
-                alt="Brain O Vision Solutions India Pvt. Ltd."
-                width={369}
-                height={167}
-                className="mt-3 h-auto w-[150px] rounded-md"
-              />
             </div>
             <p className="eyebrow text-white/50">Super Intelligence Automation &amp; Intelligent Systems</p>
             <a href={`mailto:${site.email}`} className="text-white/80 hover:text-white">

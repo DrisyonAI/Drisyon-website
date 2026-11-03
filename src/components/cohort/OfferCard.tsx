@@ -14,13 +14,15 @@ export function OfferCard({
   offerEndsAt,
   cohortSize,
   cta,
+  secondary,
 }: {
   listPaise: number;
   offerPaise: number;
   offerName: string;
   offerEndsAt: string;
   cohortSize: number;
-  cta: { label: string; href: string; note: string };
+  cta: { label: string; href: string; note: string; external?: boolean };
+  secondary?: { label: string; href: string };
 }) {
   const end = new Date(offerEndsAt).getTime();
   const [left, setLeft] = useState<number | null>(null);
@@ -86,11 +88,20 @@ export function OfferCard({
 
       <a
         href={cta.href}
-        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[0.95rem] font-medium text-white shadow-[0_10px_30px_-12px_rgb(74_58_240/0.6)]"
+        {...(cta.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        className="mt-6 flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[0.95rem] font-medium text-white shadow-[0_10px_30px_-12px_rgb(74_58_240/0.6)] transition-transform hover:-translate-y-0.5"
         style={{ background: "var(--gradient-brand)" }}
       >
         {cta.label}
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </a>
+      {secondary && (
+        <a href={secondary.href} className="mt-3 block text-center text-sm font-medium text-indigo underline-offset-4 hover:underline">
+          {secondary.label}
+        </a>
+      )}
       <p className="mt-3 text-center text-xs leading-relaxed text-muted">{cta.note}</p>
     </aside>
   );

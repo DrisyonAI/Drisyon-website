@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LIST_PRICE_PAISE, PAYMENT_URL, rupees } from "@/lib/cohort/pricing";
 import { courses } from "@/lib/content";
 import { Arrow, Button, Eyebrow, Reveal } from "./ui";
 
@@ -36,28 +37,39 @@ export function FutureReadyLearners() {
 
         {/* Featured cohort: now enrolling */}
         <Reveal className="mt-12 md:mt-14">
-          <Link
-            href="/cloud-security"
-            className="on-dark group relative flex flex-col gap-6 overflow-hidden rounded-[26px] bg-ink p-6 text-white sm:p-8 md:flex-row md:items-center md:justify-between"
-          >
+          <div className="on-dark relative flex flex-col gap-6 overflow-hidden rounded-[26px] bg-ink p-6 text-white sm:p-8 md:flex-row md:items-center md:justify-between">
             <span aria-hidden="true" className="absolute -right-20 -top-24 h-64 w-64 rounded-full opacity-40 blur-3xl" style={{ background: "var(--gradient-brand)" }} />
             <span className="relative">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-sky" aria-hidden="true" />
                 Now enrolling · Starts 1 Nov 2026
               </span>
-              <span className="mt-4 block font-display text-[1.6rem] font-semibold leading-tight tracking-[-0.03em] sm:text-[1.9rem]">
+              <Link href="/cloud-security" className="mt-4 block font-display text-[1.6rem] font-semibold leading-tight tracking-[-0.03em] hover:underline sm:text-[1.9rem]">
                 Cloud Security Cohort 01
-              </span>
+              </Link>
               <span className="mt-2 block max-w-xl text-sm leading-relaxed text-white/65">
                 6 months · 90 hours · 10 hands-on labs · 6 OEM certification tracks · 30 hours in a live industry lab. For DevOps, SRE and cloud engineers. 30 seats.
               </span>
             </span>
-            <span className="relative inline-flex shrink-0 items-center gap-2 self-start rounded-full bg-white px-5 py-3 text-sm font-medium text-ink transition-transform duration-300 group-hover:translate-x-0.5 md:self-center">
-              View program
-              <Arrow />
+            <span className="relative flex shrink-0 flex-wrap gap-3 md:flex-col md:items-stretch">
+              <a
+                href={PAYMENT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-[0_10px_30px_-12px_rgb(127_178_255/0.7)] transition-transform duration-300 hover:-translate-y-0.5"
+                style={{ background: "var(--gradient-brand)" }}
+              >
+                Buy now · {rupees(LIST_PRICE_PAISE)}
+                <Arrow />
+              </a>
+              <Link
+                href="/cloud-security"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-ink transition-transform duration-300 hover:-translate-y-0.5"
+              >
+                View program
+              </Link>
             </span>
-          </Link>
+          </div>
         </Reveal>
 
         {/* Courses */}

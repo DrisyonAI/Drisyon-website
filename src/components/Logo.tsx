@@ -10,14 +10,11 @@ export function Logo({
   tone = "dark",
   animate = true,
   className = "",
-  poweredBy = false,
 }: {
   height?: number;
   tone?: "dark" | "light";
   animate?: boolean;
   className?: string;
-  /** Adds the "powered by Brain O Vision" line under the wordmark */
-  poweredBy?: boolean;
 }) {
   const markW = Math.round(height * (493 / 678));
   const wordH = Math.round(height * 0.44);
@@ -40,30 +37,18 @@ export function Logo({
           style={{ WebkitMaskImage: "url(/logo-mark.png)", maskImage: "url(/logo-mark.png)" }}
         />
       </span>
-      <span className="flex flex-col items-start" style={{ marginBottom: height * 0.02 }}>
-        <span
-          className={`relative block shrink-0 transition-[width,height] duration-500 ${animate ? "logo-word-in" : ""}`}
-          style={{ width: wordW, height: wordH }}
-        >
-          <Image
-            src={tone === "dark" ? "/logo-word.png" : "/logo-word-light.png"}
-            alt="DRISYON"
-            width={180}
-            height={51}
-            priority
-            className="h-full w-full"
-          />
-        </span>
-        {poweredBy && (
-          <span
-            className={`fade-in mt-[3px] whitespace-nowrap font-sans font-medium leading-none tracking-[0.04em] ${
-              tone === "dark" ? "text-muted" : "text-white/55"
-            }`}
-            style={{ fontSize: Math.max(9.5, Math.round(height * 0.22)), animationDelay: "0.8s" }}
-          >
-            powered by <span className={tone === "dark" ? "text-text/80" : "text-white/80"}>Brain O Vision</span>
-          </span>
-        )}
+      <span
+        className={`relative block shrink-0 transition-[width,height] duration-500 ${animate ? "logo-word-in" : ""}`}
+        style={{ width: wordW, height: wordH, marginBottom: height * 0.02 }}
+      >
+        <Image
+          src={tone === "dark" ? "/logo-word.png" : "/logo-word-light.png"}
+          alt="DRISYON"
+          width={180}
+          height={51}
+          priority
+          className="h-full w-full"
+        />
       </span>
     </span>
   );

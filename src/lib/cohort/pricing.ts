@@ -10,12 +10,16 @@ export const PROGRAM = Object.freeze({
   cohortSize: 30,
 });
 
-export const LIST_PRICE_PAISE = 1_00_000_00;
+// ₹75,000 incl. GST since 3 Nov 2026 (matches the Razorpay payment page below). Was ₹1,00,000 with a Navratri offer.
+export const LIST_PRICE_PAISE = 75_000_00;
 export const OFFER_PRICE_PAISE = 75_000_00;
 export const OFFER_NAME = "Navratri 25% off";
 export const OFFER_ENDS_AT = new Date("2026-10-20T23:59:59+05:30");
 export const GST_RATE_BPS = 1800; // 18%
 export const MAX_SEATS_PER_ORDER = 10;
+
+/** Razorpay hosted payment page for one seat (₹75,000). The "Buy now" buttons open this. */
+export const PAYMENT_URL = "https://rzp.io/rzp/mCeIOwl";
 
 export function isOfferLive(now = new Date()) {
   return now.getTime() <= OFFER_ENDS_AT.getTime();

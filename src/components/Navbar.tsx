@@ -64,8 +64,8 @@ export function Navbar() {
             scrolled ? "h-[64px]" : "h-[84px]"
           }`}
         >
-          <Link href="/" aria-label={`${site.name}, powered by Brain O Vision — home`} className="rounded-lg" onClick={() => setOpen(false)}>
-            <Logo height={scrolled ? 38 : 46} poweredBy />
+          <Link href="/" aria-label={`${site.name} home`} className="rounded-lg" onClick={() => setOpen(false)}>
+            <Logo height={scrolled ? 38 : 46} />
           </Link>
 
           <ul className="hidden items-center gap-1 lg:flex">

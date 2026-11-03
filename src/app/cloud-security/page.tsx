@@ -4,7 +4,7 @@ import { OfferCard } from "@/components/cohort/OfferCard";
 import { ContactForm } from "@/components/ContactForm";
 import { Eyebrow, Reveal } from "@/components/ui";
 import { capstone, certs, facts, faq, hours, labBlocks, months, tools, trainerFacts, who } from "@/lib/cohort/content";
-import { GST_RATE_BPS, LIST_PRICE_PAISE, OFFER_ENDS_AT, OFFER_NAME, OFFER_PRICE_PAISE, PROGRAM, rupees } from "@/lib/cohort/pricing";
+import { GST_RATE_BPS, LIST_PRICE_PAISE, OFFER_ENDS_AT, OFFER_NAME, OFFER_PRICE_PAISE, PAYMENT_URL, PROGRAM, rupees } from "@/lib/cohort/pricing";
 import { company, contactPhone } from "@/lib/company";
 import { paymentsReady } from "@/lib/server/cohort-payments";
 import { site } from "@/lib/site";
@@ -88,11 +88,13 @@ export default function CloudSecurityPage() {
               offerName={`Navratri offer · ${OFFER_NAME.replace("Navratri ", "")}`}
               offerEndsAt={OFFER_ENDS_AT.toISOString()}
               cohortSize={PROGRAM.cohortSize}
-              cta={
-                payments
-                  ? { label: "Pay & reserve my seat", href: "#enrol", note: "Pay online with UPI, cards, net banking or EMI. A 20-minute technical screen follows; full refund if it is not a fit." }
-                  : { label: "Enquire about a seat", href: "#enrol", note: "Send an enquiry and the course team will call you to answer questions and reserve your seat." }
-              }
+              cta={{
+                label: "Buy now",
+                href: payments ? "#enrol" : PAYMENT_URL,
+                external: !payments,
+                note: "Secure payment via Razorpay: UPI, cards, net banking or EMI. A 20-minute technical screen follows; full refund if it is not a fit.",
+              }}
+              secondary={{ label: "Have questions? Enquire first", href: "#enrol" }}
             />
           </div>
         </div>
@@ -351,22 +353,15 @@ export default function CloudSecurityPage() {
             <Reveal>
               <Eyebrow dark>Reserve your seat</Eyebrow>
               <h2 id="enrol-h" className={`mt-5 ${H2}`}>
-                {payments ? "Pay online. Your seat is held at once." : "Talk to us and reserve your seat."}
+                Buy now. Your seat is held at once.
               </h2>
             </Reveal>
             <ol className="mt-8 space-y-5">
-              {(payments
-                ? [
-                    ["Pay and reserve", "Choose seats and pay securely through Razorpay. The offer price is locked the moment you pay."],
-                    ["20-minute technical screen", "We call you within two working days to talk through your cloud and Linux experience. If the cohort is not the right fit, we refund you in full."],
-                    ["Onboarding kit", "Calendar, lab access and OEM portal sign-up reach you by 31 October."],
-                  ]
-                : [
-                    ["Send an enquiry", "Tell us a little about your role. The course team replies within one working day."],
-                    ["20-minute technical screen", "A quick call about your cloud and Linux experience, so the cohort is the right fit."],
-                    ["Reserve and onboard", "We confirm your seat and fee, then send the calendar, lab access and OEM portal sign-up by 31 October."],
-                  ]
-              ).map(([t, d], i) => (
+              {[
+                ["Buy now", `Pay ${nowPrice} (incl. GST) securely through Razorpay: UPI, cards, net banking or EMI.`],
+                ["20-minute technical screen", "We call you within two working days to talk through your cloud and Linux experience. If the cohort is not the right fit, we refund you in full."],
+                ["Onboarding kit", "Calendar, lab access and OEM portal sign-up reach you after your screen."],
+              ].map(([t, d], i) => (
                 <li key={t} className="flex gap-4">
                   <b className="grid h-8 w-8 shrink-0 place-items-center rounded-full font-mono text-sm" style={{ background: "var(--gradient-brand)" }}>{i + 1}</b>
                   <span>
@@ -376,6 +371,24 @@ export default function CloudSecurityPage() {
                 </li>
               ))}
             </ol>
+
+            {!payments && (
+              <Reveal delay={0.05} className="mt-8">
+                <a
+                  href={PAYMENT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full px-7 py-4 text-base font-semibold text-white shadow-[0_14px_40px_-14px_rgb(127_178_255/0.7)] transition-transform hover:-translate-y-0.5 sm:w-auto"
+                  style={{ background: "var(--gradient-brand)" }}
+                >
+                  Buy now · {nowPrice}
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
+                <p className="mt-3 text-xs text-white/50">Opens Razorpay&apos;s secure payment page. GST included.</p>
+              </Reveal>
+            )}
 
             <div className="mt-10 rounded-[22px] bg-white/[0.04] p-6 ring-1 ring-inset ring-white/10">
               <p className="eyebrow text-sky">Prefer to talk first?</p>
@@ -409,9 +422,9 @@ export default function CloudSecurityPage() {
               <Checkout />
             ) : (
               <div className="rounded-[28px] bg-paper p-6 text-text sm:p-8 md:p-10">
-                <h3 className="font-display text-xl font-semibold tracking-[-0.02em]">Enquire about Cloud Security Cohort 01</h3>
+                <h3 className="font-display text-xl font-semibold tracking-[-0.02em]">Questions before you buy?</h3>
                 <p className="mb-8 mt-2 text-sm text-muted">
-                  Starts 1 November 2026 · {PROGRAM.cohortSize} seats · {nowPrice} incl. GST{offerLive ? " (Navratri offer)" : ""}
+                  Ask us about Cloud Security Cohort 01 ({PROGRAM.cohortSize} seats · {nowPrice} incl. GST). The course team replies within one working day.
                 </p>
                 <ContactForm defaultInterest="Cloud Security Cohort" />
               </div>
@@ -451,8 +464,13 @@ export default function CloudSecurityPage() {
         {phone && (
           <a href={`tel:${phone.e164}`} className="grid place-items-center rounded-full px-5 text-sm font-medium ring-1 ring-inset ring-line">Call</a>
         )}
-        <a href="#enrol" className="flex-1 rounded-full py-3 text-center text-sm font-medium text-white" style={{ background: "var(--gradient-brand)" }}>
-          {payments ? "Reserve seat" : "Enquire"} · {nowPrice}
+        <a
+          href={payments ? "#enrol" : PAYMENT_URL}
+          {...(payments ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+          className="flex-1 rounded-full py-3 text-center text-sm font-semibold text-white"
+          style={{ background: "var(--gradient-brand)" }}
+        >
+          Buy now · {nowPrice}
         </a>
       </div>
 
