@@ -13,7 +13,7 @@ export const company = {
   /** Grievance officer under the DPDP Act, 2023 (shown on the privacy page). */
   grievanceOfficer: null as string | null,
   jurisdiction: "Hyderabad, Telangana",
-  policiesUpdated: "16 October 2026",
+  policiesUpdated: "3 November 2026",
 };
 
 export const legalDetailsComplete = () => Boolean(company.registeredOffice && company.grievanceOfficer);

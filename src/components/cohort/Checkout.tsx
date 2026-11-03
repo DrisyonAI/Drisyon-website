@@ -140,7 +140,7 @@ export function Checkout() {
       <div className="mt-5 flex items-center justify-between gap-4 rounded-2xl bg-white p-4 ring-1 ring-inset ring-line">
         <div>
           <b className="block">Cloud Security Cohort 01</b>
-          <span className="text-xs text-muted">Seat · 6 months · starts 1 Nov 2026</span>
+          <span className="text-xs text-muted">Seat · 6 months · starts 1 Dec 2026</span>
         </div>
         <div role="group" aria-label="Number of seats" className="flex items-center gap-2">
           <button type="button" onClick={() => setSeats((s) => Math.max(1, s - 1))} disabled={seats <= 1} aria-label="Remove a seat" className="h-9 w-9 rounded-full ring-1 ring-line disabled:opacity-40">−</button>

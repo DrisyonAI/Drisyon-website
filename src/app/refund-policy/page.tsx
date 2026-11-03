@@ -7,9 +7,9 @@ const schedule = [
   ["We decide after your technical screen that the cohort is not the right fit", "100%"],
   ["The cohort is sold out when your payment completes", "100%"],
   ["We cancel the cohort, or postpone its start by more than 30 days", "100%, or a seat in the next cohort"],
-  ["You cancel on or before 25 October 2026 (7 days before start)", "100%"],
-  ["You cancel between 26 October and 14 November 2026 (up to the end of week two)", "50%"],
-  ["You cancel after 14 November 2026", "No refund. You may move to the next cohort once, if seats are available."],
+  ["You cancel on or before 24 November 2026 (7 days before start)", "100%"],
+  ["You cancel between 25 November and 14 December 2026 (up to the end of week two)", "50%"],
+  ["You cancel after 14 December 2026", "No refund. You may move to the next cohort once, if seats are available."],
   ["You are removed for breaking the lab rules", "No refund"],
 ];
 
@@ -17,7 +17,7 @@ export default function RefundPolicyPage() {
   return (
     <LegalPage title="Refund and cancellation policy">
       <p>
-        This policy applies to every paid seat in a Drisyon program. For Cloud Security Cohort 01, classes start on <b>1 November 2026</b>.
+        This policy applies to every paid seat in a Drisyon program. For Cloud Security Cohort 01, classes start on <b>1 December 2026</b>.
       </p>
 
       <H2>Refund schedule</H2>

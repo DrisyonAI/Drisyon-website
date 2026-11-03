@@ -28,7 +28,7 @@ export function CohortAnnouncement({ className = "", style }: { className?: stri
         {offer ? (
           <span className="hidden font-medium text-indigo sm:inline"> · 25% off until 20 Oct</span>
         ) : (
-          <span className="hidden text-muted sm:inline"> · Starts 1 Nov</span>
+          <span className="hidden text-muted sm:inline"> · Starts 1 Dec</span>
         )}
       </span>
       <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true" className="shrink-0 text-indigo transition-transform group-hover:translate-x-0.5">

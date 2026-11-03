@@ -42,7 +42,7 @@ export function FutureReadyLearners() {
             <span className="relative">
               <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky">
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-sky" aria-hidden="true" />
-                Now enrolling · Starts 1 Nov 2026
+                Now enrolling · Starts 1 Dec 2026
               </span>
               <Link href="/cloud-security" className="mt-4 block font-display text-[1.6rem] font-semibold leading-tight tracking-[-0.03em] hover:underline sm:text-[1.9rem]">
                 Cloud Security Cohort 01

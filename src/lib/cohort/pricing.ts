@@ -6,7 +6,7 @@
 export const PROGRAM = Object.freeze({
   code: "CYB-DEVOPS-2026-11",
   name: "Drisyon Cloud Security Cohort 01",
-  startDate: "2026-11-01",
+  startDate: "2026-12-01",
   cohortSize: 30,
 });
 

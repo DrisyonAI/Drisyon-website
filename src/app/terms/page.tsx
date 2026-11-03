@@ -18,7 +18,7 @@ export default function TermsPage() {
 
       <H2>1. The program</H2>
       <ul className={ul}>
-        <li>Cloud Security Cohort 01 starts on 1 November 2026 and runs for about six months: 90 hours of live, instructor-led sessions on weekends (IST), hands-on labs and three industry-lab blocks.</li>
+        <li>Cloud Security Cohort 01 starts on 1 December 2026 and runs for about six months: 90 hours of live, instructor-led sessions on weekends (IST), hands-on labs and three industry-lab blocks.</li>
         <li>The schedule, session order and named tools may change for reasons such as trainer availability or vendor licensing. When a tool is unavailable, we substitute an equivalent enterprise tool covering the same skill.</li>
         <li>Sessions are delivered online unless a session is announced as in person. You need a laptop with 16 GB RAM and a stable internet connection.</li>
       </ul>

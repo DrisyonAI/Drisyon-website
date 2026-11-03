@@ -15,7 +15,7 @@ export const revalidate = 300;
 export const metadata: Metadata = {
   title: "Cloud Security Cohort 01",
   description:
-    "A 6-month, 90-hour cybersecurity program for DevOps, SRE and cloud engineers: ten hands-on labs, six OEM certification tracks and 30 hours in a working industry lab. Starts 1 November 2026.",
+    "A 6-month, 90-hour cybersecurity program for DevOps, SRE and cloud engineers: ten hands-on labs, six OEM certification tracks and 30 hours in a working industry lab. Starts 1 December 2026.",
   alternates: { canonical: "/cloud-security" },
   openGraph: { title: "Cloud Security Cohort 01 | DRISYON", url: "/cloud-security" },
 };

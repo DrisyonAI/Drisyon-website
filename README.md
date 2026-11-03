@@ -106,7 +106,7 @@ This course page was merged from Talia Technologies' `drisyon-cyber-cohort` proj
 
 **Go-live checklist** (from the original project's launch plan):
 - [ ] Fill the registered office address and grievance officer in `src/lib/company.ts`.
-- [ ] Sign off the refund windows (100% until 25 Oct, 50% until 14 Nov) and the exam-voucher wording in the terms.
+- [ ] Sign off the refund windows (100% until 24 Nov, 50% until 14 Dec; start date 1 Dec 2026) and the exam-voucher wording in the terms.
 - [ ] Get written confirmation from the industry-lab partner for "patented, licensed enterprise tools" and the named vendors.
 - [ ] Set `CONTACT_PHONE` to show the Call / WhatsApp buttons.
 - [ ] Set the Razorpay **test** keys, `RAZORPAY_WEBHOOK_SECRET`, `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`, then `COHORT_PAYMENTS=on`.
@@ -114,7 +114,7 @@ This course page was merged from Talia Technologies' `drisyon-cyber-cohort` proj
 - [ ] Make one test payment and one test refund. Check that the row appears in `drisyon_enrolments` and then shows `refunded`.
 - [ ] Switch to the **live** keys after Razorpay KYC and submit drisyon.com for live activation.
 
-The Navratri offer price ends automatically on 20 Oct 2026 at 11:59 pm IST. The page re-renders every 5 minutes, and an open tab switches over at the deadline.
+The seat price is ₹75,000 incl. GST (`LIST_PRICE_PAISE` in `src/lib/cohort/pricing.ts`), matching the Razorpay payment page `PAYMENT_URL` that the Buy now buttons open. The cohort starts on 1 Dec 2026 (`PROGRAM.startDate`); the homepage announcement hides itself from that date.
 
 ## Content still to supply
 

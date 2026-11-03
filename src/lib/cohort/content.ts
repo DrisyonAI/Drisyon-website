@@ -4,8 +4,8 @@
  */
 
 export const facts = [
-  { label: "Starts", value: "Sun, 1 Nov 2026" },
-  { label: "Duration", value: "6 months · Nov–Apr" },
+  { label: "Starts", value: "Tue, 1 Dec 2026" },
+  { label: "Duration", value: "6 months · Dec–May" },
   { label: "Schedule", value: "Weekends, IST" },
   { label: "Cohort", value: "30 seats only" },
 ];
@@ -27,50 +27,50 @@ export type Month = { m: string; when: string; title: string; chips: string[]; l
 
 export const months: Month[] = [
   {
-    m: "Month 1", when: "Nov 2026", title: "Foundations and the perimeter", chips: ["NSE 1", "NSE 2"],
+    m: "Month 1", when: "Dec 2026", title: "Foundations and the perimeter", chips: ["NSE 1", "NSE 2"],
     s: [
       { id: "S01", t: "Threat lifecycle, lab setup and telemetry basics", tools: "Wazuh · Elastic · Wireshark", out: "Topology diagram, log inventory, baseline events", ops: "Ship container and CI runner logs to the SIEM" },
       { id: "S02", t: "Network security (NGFW): policy, segmentation, visibility", tools: "FortiGate · Palo Alto · Sophos", out: "Firewall policy set, annotated logs, change notes", ops: "Policy-as-code review in a pull request" },
     ],
   },
   {
-    m: "Month 2", when: "Dec 2026", title: "Applications and endpoints", chips: ["SC-900"], lab: "Industry lab · Block 1",
+    m: "Month 2", when: "Jan 2027", title: "Applications and endpoints", chips: ["SC-900"], lab: "Industry lab · Block 1",
     s: [
       { id: "S03", t: "Web application firewall: deployment and tuning", tools: "FortiWeb · Cloudflare · Barracuda WAF", out: "WAF tuning report, blocked-events analysis", ops: "WAF rules shipped with the app's IaC" },
       { id: "S04", t: "Endpoint security (EDR): alert triage and containment", tools: "SentinelOne · CrowdStrike", out: "Triage worksheet, containment evidence, IOC list", ops: "EDR coverage for build agents and bastions" },
     ],
   },
   {
-    m: "Month 3", when: "Jan 2027", title: "Testing what you ship", chips: ["Qualys VMDR"],
+    m: "Month 3", when: "Feb 2027", title: "Testing what you ship", chips: ["Qualys VMDR"],
     s: [
       { id: "S05", t: "Application security: DAST scan, validate, report", tools: "Burp Suite · Qualys · Metasploit · OWASP ZAP", out: "Mini VAPT report, validated findings, remediation proof", ops: "ZAP baseline scan as a pipeline gate" },
       { id: "S06", t: "Zero Trust and IAM: access governance essentials", tools: "Zscaler · Okta · SailPoint", out: "Access matrix, access-review decisions", ops: "Least-privilege roles for pipelines and service accounts" },
     ],
   },
   {
-    m: "Month 4", when: "Feb 2027", title: "Cloud and data", chips: ["PANW Network Security Pro"], lab: "Industry lab · Block 2",
+    m: "Month 4", when: "Mar 2027", title: "Cloud and data", chips: ["PANW Network Security Pro"], lab: "Industry lab · Block 2",
     s: [
       { id: "S07", t: "Cloud security and CASB: misconfiguration and controls", tools: "Netskope CASB", out: "Five-item misconfiguration checklist, cloud baseline controls sheet", ops: "Misconfig checks before terraform apply" },
       { id: "S08", t: "Data security (DLP) and email security", tools: "Netskope · Forcepoint · Barracuda Email · FortiMail", out: "DLP rule evidence, email-security decision tree", ops: "Secret and PII leakage checks on repos and buckets" },
     ],
   },
   {
-    m: "Month 5", when: "Mar 2027", title: "Investigate and respond", chips: ["PANW Security Operations Pro"],
+    m: "Month 5", when: "Apr 2027", title: "Investigate and respond", chips: ["PANW Security Operations Pro"],
     s: [
       { id: "S09", t: "Digital forensics: acquire, preserve, analyse, timeline", tools: "FTK Imager · MSAB · OpenText · Autopsy", out: "Hashes, chain-of-custody form, incident timeline", ops: "Snapshot-based evidence capture for cloud VMs" },
       { id: "S10", t: "SOC and SOAR: detection engineering, playbooks, capstone", tools: "Seceon · Wazuh · ELK (Sigma)", out: "Detection rule, SIEM dashboard, SOAR playbook", ops: "Detections stored and versioned in Git" },
     ],
   },
-  { m: "Month 6", when: "Apr 2027", title: "Capstone and SOC floor", chips: ["Capstone defence", "Portfolio review"], lab: "Industry lab · Block 3", s: [] },
+  { m: "Month 6", when: "May 2027", title: "Capstone and SOC floor", chips: ["Capstone defence", "Portfolio review"], lab: "Industry lab · Block 3", s: [] },
 ];
 
 export const capstone =
   "Finish the capstone: detect, contain and report a staged cloud breach end to end, then defend it on the SOC floor in front of practitioners. Portfolio review and demo day close the cohort.";
 
 export const labBlocks = [
-  { when: "Block 1 · December", title: "Perimeter and endpoint", text: "Next-gen firewall policy, WAF tuning and EDR triage on licensed FortiGate, Palo Alto, FortiWeb, SentinelOne and CrowdStrike consoles." },
-  { when: "Block 2 · February", title: "Identity, cloud and data", text: "Zero Trust access, CASB posture checks and DLP rules on Zscaler, Okta, Netskope and Forcepoint, against cloud workloads you deploy." },
-  { when: "Block 3 · April", title: "Forensics and the SOC floor", text: "Evidence acquisition with FTK Imager and MSAB, then a live detection and response shift on Seceon SIEM/SOAR. Capstone defence happens here." },
+  { when: "Block 1 · January", title: "Perimeter and endpoint", text: "Next-gen firewall policy, WAF tuning and EDR triage on licensed FortiGate, Palo Alto, FortiWeb, SentinelOne and CrowdStrike consoles." },
+  { when: "Block 2 · March", title: "Identity, cloud and data", text: "Zero Trust access, CASB posture checks and DLP rules on Zscaler, Okta, Netskope and Forcepoint, against cloud workloads you deploy." },
+  { when: "Block 3 · May", title: "Forensics and the SOC floor", text: "Evidence acquisition with FTK Imager and MSAB, then a live detection and response shift on Seceon SIEM/SOAR. Capstone defence happens here." },
 ];
 
 export const tools = [
@@ -94,7 +94,7 @@ export const certs = [
 ];
 
 export const faq = [
-  { q: "When do sessions run?", a: "Live labs run on weekends in IST, about two per month. Clinics fill the weeks in between. The full calendar goes out at orientation on 1 November. There is no session on Diwali weekend." },
+  { q: "When do sessions run?", a: "Live labs run on weekends in IST, about two per month. Clinics fill the weeks in between. The full calendar goes out at orientation on 1 December." },
   { q: "What if I miss a session?", a: "Each lab is recorded, and the next clinic slot is used to finish the missed deliverable with a mentor. Industry lab blocks are in person and are scheduled with four weeks' notice." },
   { q: "Do I need my own cloud account or licences?", a: "No. Lab environments and all enterprise tool access are provided. A laptop with 16 GB RAM and a stable connection is enough." },
   { q: "Why only 30 seats?", a: "Industry lab consoles and mentor time are limited. Thirty keeps every learner hands-on during each block." },
